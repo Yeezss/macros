@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>clickr</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand"><span class="dot" id="dot"></span><h1>clickr</h1></div>
+    <div class="pill" id="pill">idle</div>
+  </header>
+
+  <section class="card readout">
+    <div class="big"><span id="cps">0</span><small>cps</small></div>
+    <canvas id="chart" width="360" height="70"></canvas>
+    <div class="legend"><span class="k cps"></span>cps <span class="k cpu"></span>cpu <b id="cpu">0%</b></div>
+  </section>
+
+  <section class="card">
+    <h2>trigger</h2>
+    <div class="row"><label>enabled</label><button class="toggle" id="enabled" role="switch"></button></div>
+    <div class="row"><label>trigger key</label><button class="keybtn" id="trigger">F6</button></div>
+    <div class="row"><label>mode</label>
+      <div class="seg" id="mode"><button data-v="hold">hold</button><button data-v="toggle">toggle</button></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>output</h2>
+    <div class="row col">
+      <div class="between"><label>target cps</label>
+        <input class="num" id="cpsNum" type="number" min="1" max="5000"></div>
+      <input id="cpsRange" type="range" min="1" max="5000" step="1">
+      <p class="warn" id="warn" hidden>above ~1000 cps clicks are sent in 1 ms batches. the average rate stays exact, but most games can't read inputs that fast.</p>
+    </div>
+    <div class="row col">
+      <div class="between"><label>keys / buttons</label><button class="ghost" id="add">+ add</button></div>
+      <div class="chips" id="chips"></div>
+      <div class="quick"><button class="ghost" data-q="MouseLeft">+ left click</button><button class="ghost" data-q="MouseRight">+ right click</button></div>
+    </div>
+    <div class="row"><label>press all keys every click<span class="hint">off = alternate one key per click</span></label><button class="toggle" id="multi" role="switch"></button></div>
+  </section>
+
+  <section class="card">
+    <h2>app</h2>
+    <div class="row"><label>always on top</label><button class="toggle" id="top" role="switch"></button></div>
+    <div class="row"><label>accent</label><input type="color" id="accent"></div>
+  </section>
+
+  <footer>
+    <span>made by <b>6a5m</b></span><span class="sep">·</span>
+    <a href="#" id="discord" title="click to copy">discord @6a5m</a>
+  </footer>
+</main>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
