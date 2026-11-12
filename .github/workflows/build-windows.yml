@@ -1,0 +1,24 @@
+name: build-windows
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - name: Test pure logic
+        run: cargo test --release
+        working-directory: src-tauri
+      - name: Build clickr.exe
+        run: cargo build --release --features custom-protocol
+        working-directory: src-tauri
+      - uses: actions/upload-artifact@v4
+        with:
+          name: clickr-windows
+          path: src-tauri/target/release/clickr.exe
